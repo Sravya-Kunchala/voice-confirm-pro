@@ -116,10 +116,11 @@ export default function Navbar() {
     return location.pathname === href || (href === "/" && location.pathname === "");
   };
 
-  // Lock body scroll when drawer is open
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [menuOpen]);
 
   return (
@@ -138,7 +139,6 @@ export default function Navbar() {
 
       <nav style={styles.navbar}>
         <div style={styles.inner}>
-          {/* Logo */}
           <Link to="/" style={styles.logo}>
             <span style={styles.logoIcon}>
               <img src="/voice-confirm.svg" alt="VoiceConfirm Pro" width={20} height={20} />
@@ -146,30 +146,31 @@ export default function Navbar() {
             <span style={styles.logoText}>VoiceConfirm Pro</span>
           </Link>
 
-          {/* Desktop Nav Links */}
           <ul className="nav-desktop-links" style={styles.links}>
             {navLinks.map((link) => (
               <li key={link.label}>
-                <a
-                  href={link.href}
+                <Link
+                  to={link.href}
                   style={{
                     ...styles.link,
                     ...(isActiveLink(link.href) ? styles.linkActive : {}),
                   }}
                 >
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
 
-          {/* Desktop CTA Buttons */}
           <div className="nav-desktop-actions" style={styles.actions}>
-            <a href="/signin" style={styles.signIn}>Sign In</a>
-            <a href="/contact" style={styles.cta}>Free Trial <span>→</span></a>
+            <Link to="/signin" style={styles.signIn}>
+              Sign In
+            </Link>
+            <Link to="/contact" style={styles.cta}>
+              Free Trial <span>→</span>
+            </Link>
           </div>
 
-          {/* Mobile Hamburger */}
           <button
             className="nav-hamburger"
             onClick={() => setMenuOpen(true)}
@@ -191,7 +192,6 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Backdrop */}
       <div
         onClick={() => setMenuOpen(false)}
         style={{
@@ -205,7 +205,6 @@ export default function Navbar() {
         }}
       />
 
-      {/* Right Slide-in Drawer */}
       <div
         style={{
           position: "fixed",
@@ -223,7 +222,6 @@ export default function Navbar() {
           fontFamily: "'DM Sans', 'Segoe UI', sans-serif",
         }}
       >
-        {/* Drawer Header */}
         <div
           style={{
             display: "flex",
@@ -242,7 +240,6 @@ export default function Navbar() {
             <span style={styles.logoText}>VoiceConfirm Pro</span>
           </Link>
 
-          {/* Close Button */}
           <button
             onClick={() => setMenuOpen(false)}
             aria-label="Close menu"
@@ -264,7 +261,6 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Drawer Nav Links */}
         <div
           style={{
             flex: 1,
@@ -276,9 +272,9 @@ export default function Navbar() {
           }}
         >
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.label}
-              href={link.href}
+              to={link.href}
               style={{
                 textDecoration: "none",
                 fontSize: "15px",
@@ -295,11 +291,10 @@ export default function Navbar() {
               onClick={() => setMenuOpen(false)}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </div>
 
-        {/* Drawer Footer CTA */}
         <div
           style={{
             padding: "16px 20px",
@@ -310,8 +305,8 @@ export default function Navbar() {
             flexShrink: 0,
           }}
         >
-          <a
-            href="/signin"
+          <Link
+            to="/signin"
             style={{
               ...styles.signIn,
               display: "block",
@@ -321,9 +316,9 @@ export default function Navbar() {
             onClick={() => setMenuOpen(false)}
           >
             Sign In
-          </a>
-          <a
-            href="/contact"
+          </Link>
+          <Link
+            to="/contact"
             style={{
               ...styles.cta,
               justifyContent: "center",
@@ -331,8 +326,8 @@ export default function Navbar() {
             }}
             onClick={() => setMenuOpen(false)}
           >
-            Free Trial →
-          </a>
+            Free Trial <span>→</span>
+          </Link>
         </div>
       </div>
     </>
