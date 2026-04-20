@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { ACFIcon, FunnelsIcon, MultilingualBadge, WooIcon } from "./integration-symbols";
 
 function useInView(threshold = 0.08) {
   const ref = useRef<HTMLDivElement>(null);
@@ -17,35 +16,26 @@ function useInView(threshold = 0.08) {
   return { ref, inView };
 }
 
-// ── Icons ────────────────────────────────────────────────────────────────────
-
 const WhatsAppIcon = () => (
-  <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-    <circle cx="18" cy="18" r="18" fill="#25D366"/>
-    <path d="M25.5 10.5A10.45 10.45 0 0018 7.5C12.2 7.5 7.5 12.2 7.5 18c0 1.84.48 3.63 1.4 5.22L7.5 28.5l5.4-1.42A10.46 10.46 0 0018 28.5c5.8 0 10.5-4.7 10.5-10.5 0-2.8-1.09-5.43-3-7.5zm-7.5 16.13a8.67 8.67 0 01-4.42-1.21l-.32-.19-3.2.84.85-3.12-.2-.32A8.69 8.69 0 019.32 18c0-4.79 3.9-8.69 8.69-8.69a8.69 8.69 0 016.14 14.83 8.63 8.63 0 01-6.15 2.49zm4.77-6.5c-.26-.13-1.54-.76-1.78-.84-.24-.09-.41-.13-.58.13-.17.26-.65.84-.8 1.01-.15.17-.29.19-.55.06-.26-.13-1.1-.4-2.1-1.29-.78-.69-1.3-1.54-1.45-1.8-.15-.26-.02-.4.11-.53.12-.12.26-.31.39-.47.13-.16.17-.27.26-.45.09-.17.04-.33-.02-.46-.06-.13-.58-1.4-.8-1.91-.21-.5-.43-.43-.58-.44h-.5c-.17 0-.45.06-.69.33-.24.26-.9.88-.9 2.14s.92 2.48 1.05 2.65c.13.17 1.81 2.76 4.38 3.87.61.26 1.09.42 1.46.54.61.19 1.17.16 1.6.1.49-.07 1.5-.61 1.72-1.2.21-.59.21-1.1.15-1.2-.07-.1-.24-.16-.5-.29z" fill="white"/>
-  </svg>
+  <img src="/WhatsApp.svg" alt="WhatsApp" width="36" height="36" />
 );
 
 const TwilioIcon = () => (
-  <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-    <circle cx="18" cy="18" r="18" fill="#F22F46"/>
-    <circle cx="18" cy="18" r="6" fill="none" stroke="white" strokeWidth="2.5"/>
-    <circle cx="13.5" cy="13.5" r="2" fill="white"/>
-    <circle cx="22.5" cy="13.5" r="2" fill="white"/>
-    <circle cx="13.5" cy="22.5" r="2" fill="white"/>
-    <circle cx="22.5" cy="22.5" r="2" fill="white"/>
-  </svg>
+  <img src="/t.svg" alt="Twilio SMS" width="36" height="36" />
 );
 
 const MSG91Icon = () => (
-  <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-    <circle cx="18" cy="18" r="18" fill="#3B5BDB"/>
-    <path d="M9 13.5C9 12.67 9.67 12 10.5 12h15c.83 0 1.5.67 1.5 1.5v9c0 .83-.67 1.5-1.5 1.5h-15C9.67 24 9 23.33 9 22.5v-9z" fill="white" fillOpacity="0.2" stroke="white" strokeWidth="1.5"/>
-    <path d="M9 13.5l9 6 9-6" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-  </svg>
+  <img src="/m.svg" alt="MSG91" width="36" height="36" />
 );
 
-// ── Data ─────────────────────────────────────────────────────────────────────
+const WooBadge = () => (
+  <img src="/wooc.svg" alt="WooCommerce" width="48" height="48" />
+);
+
+const FunnelsIcon = () => (
+  <img src="/image 8.svg" alt="Funnels" width="48" height="48" />
+);
+
 
 const channels = [
   {
@@ -67,7 +57,7 @@ const channels = [
 
 const integrationItems = [
   {
-    badge: <WooIcon />,
+    badge: <WooBadge />,
     title: "WooCommerce Subscriptions",
     desc: "Trigger calls for renewals and activations separately.",
   },
@@ -77,18 +67,16 @@ const integrationItems = [
     desc: "Custom scripts based on specific funnel stages and upsell orders.",
   },
   {
-    badge: <MultilingualBadge />,
+    badge: <div style={{ display: "flex", gap: 8 }}><img src="/w1.svg" alt="w1" width="48" height="48" /><img src="/w2.svg" alt="w2" width="48" height="48" /></div>,
     title: "Multilingual Support",
     desc: "Language detected from site preference, not just geography.",
   },
   {
-    badge: <ACFIcon />,
+    badge: <div style={{ display: "flex", gap: 8 }}><img src="/a1.svg" alt="a1" width="32" height="32" /><img src="/a2.svg" alt="a2" width="32" height="32" /></div>,
     title: "Advanced Custom Fields",
     desc: "Pull custom order metadata into your call scripts dynamically.",
   },
 ];
-
-// ── Component ─────────────────────────────────────────────────────────────────
 
 export default function FallbackAndIntegration() {
   const section1 = useInView(0.08);
@@ -120,9 +108,8 @@ export default function FallbackAndIntegration() {
           width: 100%;
         }
 
-        /* ── Section 1: Fallback Messaging ── */
         .fi-s1 {
-          padding: 80px 24px 72px;
+          padding: 80px 0px 72px;
           max-width: 900px;
           margin: 0 auto;
         }
@@ -155,29 +142,28 @@ export default function FallbackAndIntegration() {
         .fi-cards {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 16px;
+          gap: 8px;
         }
 
         .fi-card {
-          background: #fff;
+          background: #F7F5F0;
+          border: 1px solid rgba(26,23,48,0.08);
           border-radius: 16px;
           padding: 28px 24px;
           opacity: 0;
-          transition: box-shadow 0.25s ease, transform 0.22s ease;
+          text-align: left;
+          transition: box-shadow 0.25s ease, transform 0.22s ease, background 0.2s ease;
         }
         .fi-card:hover {
+          background: #ffffff;
           box-shadow: 0 10px 36px rgba(0,0,0,0.09);
           transform: translateY(-4px);
         }
         .fi-card.in { animation: fi-cardPop 0.55s cubic-bezier(0.34,1.4,0.64,1) forwards; }
 
-        .fi-card-icon {
-          margin-bottom: 18px;
-          display: inline-block;
-        }
-        .fi-card:hover .fi-card-icon {
-          animation: fi-iconBounce 0.6s ease;
-        }
+        .fi-card-icon { margin-bottom: 18px; display: inline-block; }
+        .fi-card:hover .fi-card-icon { animation: fi-iconBounce 0.6s ease; }
+
         .fi-card-title {
           font-family: 'Fraunces', serif;
           font-size: 17px;
@@ -192,7 +178,6 @@ export default function FallbackAndIntegration() {
           line-height: 1.68;
         }
 
-        /* ── Divider ── */
         .fi-divider {
           height: 1px;
           background: linear-gradient(90deg, transparent, rgba(26,23,48,0.1), transparent);
@@ -200,20 +185,17 @@ export default function FallbackAndIntegration() {
           margin: 0 auto;
         }
 
-        /* ── Section 2: Deep WooCommerce Integration ── */
         .fi-s2 {
-          padding: 72px 24px 88px;
+          padding: 72px 0px 88px;
           max-width: 900px;
           margin: 0 auto;
           display: grid;
-          grid-template-columns: 260px 1fr;
+          grid-template-columns: 380px 1fr;
           gap: 40px;
           align-items: start;
         }
 
-        .fi-s2-left {
-          opacity: 0;
-        }
+        .fi-s2-left { opacity: 0; }
         .fi-s2-left.in { animation: fi-fadeUp 0.65s ease 0.05s forwards; }
 
         .fi-s2-title {
@@ -234,13 +216,13 @@ export default function FallbackAndIntegration() {
         .fi-s2-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 16px;
+          gap: 8px;
         }
 
         .fi-int-card {
-          background: #fff;
-          border-radius: 14px;
-          padding: 22px 20px;
+          background: #F2F3FF;
+          border-radius: 24px;
+          padding: 24px;
           opacity: 0;
           transition: box-shadow 0.22s ease, transform 0.2s ease;
         }
@@ -252,50 +234,40 @@ export default function FallbackAndIntegration() {
 
         .fi-int-badge { margin-bottom: 12px; display: flex; align-items: center; }
         .fi-int-title {
-          font-size: 13.5px;
+          font-size: 14px;
           font-weight: 700;
           color: #1A1730;
           margin-bottom: 6px;
           line-height: 1.35;
         }
         .fi-int-desc {
-          font-size: 12.5px;
+          font-size: 13px;
           color: #7A788A;
           line-height: 1.6;
         }
 
-        /* ── Mobile ── */
         @media (max-width: 700px) {
-          .fi-s1 { padding: 60px 18px 56px; }
-          .fi-cards { grid-template-columns: 1fr; gap: 12px; }
-          .fi-s2 {
-            grid-template-columns: 1fr;
-            gap: 32px;
-            padding: 56px 18px 72px;
-          }
-          .fi-s2-grid { grid-template-columns: 1fr; gap: 12px; }
-          .fi-s2-left { text-align: left; }
+          .fi-s1 { padding: 60px 16px 56px; }
+          .fi-cards { grid-template-columns: 1fr; gap: 8px; }
+          .fi-s2 { grid-template-columns: 1fr; gap: 32px; padding: 56px 16px 72px; }
+          .fi-s2-grid { grid-template-columns: 1fr; gap: 8px; }
         }
 
         @media (min-width: 701px) and (max-width: 860px) {
-          .fi-s2 { grid-template-columns: 200px 1fr; gap: 28px; }
+          .fi-s2 { grid-template-columns: 280px 1fr; gap: 28px; }
         }
       `}</style>
 
       <div className="fi-wrap">
 
-        {/* ── Section 1: Fallback Messaging ─────────────────────────── */}
         <div className="fi-s1" ref={section1.ref}>
           <div className="fi-s1-head">
-            <h2 className={`fi-s1-title${section1.inView ? " in" : ""}`}>
-              Fallback Messaging
-            </h2>
+            <h2 className={`fi-s1-title${section1.inView ? " in" : ""}`}>Fallback Messaging</h2>
             <p className={`fi-s1-sub${section1.inView ? " in" : ""}`}>
               Never lose a confirmation. When voice calls fail, our intelligent fallback system
               kicks in across popular text channels.
             </p>
           </div>
-
           <div className="fi-cards">
             {channels.map((c, i) => (
               <div
@@ -313,18 +285,14 @@ export default function FallbackAndIntegration() {
 
         <div className="fi-divider" />
 
-        {/* ── Section 2: Deep WooCommerce Integration ───────────────── */}
         <div className="fi-s2" ref={section2.ref}>
-          {/* Left label */}
           <div className={`fi-s2-left${section2.inView ? " in" : ""}`}>
-            <h2 className="fi-s2-title">Deep WooCommerce Integration</h2>
+            <h2 className="fi-s2-title">Deep WooCommerce<br />Integration</h2>
             <p className="fi-s2-sub">
-              We don't just "connect" to WooCommerce; we live in side your data stack to trigger
+              We don't just "connect" to WooCommerce; we live inside your data stack to trigger
               complex logic effortlessly.
             </p>
           </div>
-
-          {/* Right grid */}
           <div className="fi-s2-grid">
             {integrationItems.map((item, i) => (
               <div
@@ -344,4 +312,3 @@ export default function FallbackAndIntegration() {
     </>
   );
 }
-

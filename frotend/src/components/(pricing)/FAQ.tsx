@@ -303,10 +303,12 @@ function AnimatedTitle() {
 ───────────────────────────────────────────── */
 export default function FAQ() {
   const [mounted, setMounted] = useState(false);
+  const [showAll, setShowAll] = useState(false);
   useEffect(() => { setMounted(true); }, []);
+  const visibleFaqs = showAll ? faqs : faqs.slice(0, 5);
 
   return (
-    <div style={{ fontFamily: "'Sora', sans-serif", backgroundColor: "#f5f3ef", minHeight: "100vh", padding: "64px 24px 80px", boxSizing: "border-box" }}>
+    <div style={{ fontFamily: "'Sora', sans-serif", backgroundColor: "#f5f3ef", minHeight: "auto", padding: "40px 24px 80px", boxSizing: "border-box" }}>
       <style>{GLOBAL_CSS}</style>
 
       <div style={{ maxWidth: 820, margin: "0 auto" }}>
@@ -343,7 +345,7 @@ export default function FAQ() {
 
         {/* ── FAQ list ── */}
         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-          {faqs.map((item, i) => (
+          {visibleFaqs.map((item, i) => (
             <FAQItemCard
               key={item.question}
               item={item}
@@ -352,6 +354,28 @@ export default function FAQ() {
             />
           ))}
         </div>
+
+        {faqs.length > 5 && (
+          <div style={{ display: "flex", justifyContent: "center", marginTop: 20 }}>
+            <button
+              type="button"
+              onClick={() => setShowAll((prev) => !prev)}
+              style={{
+                border: "1px solid rgba(124,92,191,0.18)",
+                background: "#fff",
+                color: "#7c5cbf",
+                fontSize: 12,
+                fontWeight: 700,
+                padding: "10px 18px",
+                borderRadius: 999,
+                cursor: "pointer",
+                boxShadow: "0 8px 18px rgba(124,92,191,0.08)",
+              }}
+            >
+              {showAll ? "Show less" : "View more"}
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

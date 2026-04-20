@@ -8,7 +8,6 @@ function DotGrid() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
@@ -22,19 +21,15 @@ function DotGrid() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       const cols = Math.ceil(canvas.width / DOT_SIZE) + 1;
       const rows = Math.ceil(canvas.height / DOT_SIZE) + 1;
-
       for (let r = 0; r < rows; r++) {
         for (let c = 0; c < cols; c++) {
           const x = c * DOT_SIZE;
           const y = r * DOT_SIZE;
-
-          // Radial fade: dots near center are dimmer (dark bg shows through)
           const cx = canvas.width / 2;
           const cy = canvas.height / 2;
           const dist = Math.sqrt((x - cx) ** 2 + (y - cy) ** 2);
           const maxDist = Math.sqrt(cx ** 2 + cy ** 2);
           const alpha = 0.08 + 0.22 * (dist / maxDist);
-
           ctx.beginPath();
           ctx.arc(x, y, 1.2, 0, Math.PI * 2);
           ctx.fillStyle = `rgba(160, 140, 220, ${alpha})`;
@@ -51,13 +46,7 @@ function DotGrid() {
   return (
     <canvas
       ref={canvasRef}
-      style={{
-        position: "absolute",
-        inset: 0,
-        width: "100%",
-        height: "100%",
-        pointerEvents: "none",
-      }}
+      style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" }}
     />
   );
 }
@@ -66,7 +55,7 @@ export default function FeaturesHero() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500&display=swap');
 
         .features-hero-section {
           position: relative;
@@ -79,7 +68,6 @@ export default function FeaturesHero() {
           background: #0d0c1d;
         }
 
-        /* Radial glow in center */
         .features-hero-section::before {
           content: '';
           position: absolute;
@@ -104,7 +92,6 @@ export default function FeaturesHero() {
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 0;
         }
 
         .features-badge {
@@ -114,85 +101,61 @@ export default function FeaturesHero() {
           border-radius: 999px;
           background: rgba(255,255,255,0.04);
           color: rgba(220, 210, 255, 0.85);
-          font-family: 'DM Sans', sans-serif;
+          font-family: 'Inter', sans-serif;
           font-size: 13px;
           font-weight: 500;
           letter-spacing: 0.04em;
           margin-bottom: 28px;
-          backdrop-filter: blur(6px);
         }
 
         .features-heading {
-          font-family: 'DM Sans', sans-serif;
-          font-weight: 700;
-          font-size: clamp(2rem, 5.5vw, 3.4rem);
-          line-height: 1.13;
+          font-family: 'DM Serif Display', serif;
+          font-weight: 400;
+          font-size: 52px;
+          line-height: 1.15;
           color: #ffffff;
-          margin: 0 0 0 0;
-          letter-spacing: -0.01em;
+          margin: 0;
+          letter-spacing: 0;
         }
 
         .features-heading-accent {
-          font-family: 'Playfair Display', serif;
+          font-family: 'DM Serif Display', serif;
           font-style: italic;
-          font-weight: 700;
+          font-weight: 400;
           color: #a855f7;
-          display: block;
         }
 
         .features-subtext {
           margin-top: 24px;
-          font-family: 'DM Sans', sans-serif;
-          font-size: clamp(14px, 2vw, 16.5px);
+          font-family: 'Inter', sans-serif;
+          font-size: 16px;
           font-weight: 400;
-          color: rgba(200, 195, 230, 0.7);
-          line-height: 1.7;
-          max-width: 500px;
+          color: rgba(255, 255, 255, 0.7);
+          line-height: 32px;
+          max-width: 520px;
+          text-align: center;
         }
 
-        /* Mobile */
         @media (max-width: 640px) {
-          .features-hero-inner {
-            padding: 52px 20px 60px;
-          }
-
-          .features-badge {
-            font-size: 12px;
-            padding: 4px 14px;
-            margin-bottom: 22px;
-          }
-
-          .features-subtext {
-            margin-top: 18px;
-          }
-        }
-
-        /* Tablet */
-        @media (min-width: 641px) and (max-width: 1024px) {
-          .features-hero-inner {
-            padding: 60px 40px 68px;
-          }
+          .features-heading { font-size: 32px; }
+          .features-subtext { font-size: 16px; line-height: 26px; margin-top: 18px; }
+          .features-hero-inner { padding: 52px 20px 60px; }
         }
       `}</style>
 
       <section className="features-hero-section">
-        {/* Dot grid canvas */}
         <DotGrid />
 
         <div className="features-hero-inner">
-          {/* Badge */}
           <span className="features-badge">Features</span>
 
-          {/* Heading */}
           <h1 className="features-heading">
             Everything You Need to{" "}
             <span className="features-heading-accent">Confirm Every Order</span>
           </h1>
 
-          {/* Subtext */}
           <p className="features-subtext">
             VoiceConfirm Pro is built specifically for high-volume COD stores.
-            <br />
             Every feature exists because real store owners asked for it.
           </p>
         </div>

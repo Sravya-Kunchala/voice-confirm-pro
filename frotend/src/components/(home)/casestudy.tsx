@@ -70,7 +70,7 @@ export default function CaseStudy() {
         padding: "60px 24px",
         fontFamily: "'DM Sans', sans-serif",
       }}
-      >
+    >
       <link
         href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap"
         rel="stylesheet"
@@ -382,7 +382,19 @@ export default function CaseStudy() {
                   letterSpacing: "0.06em",
                 }}
               >
-                — Suresh Kumar, Founder, ElectroMart Hyderabad
+                {"— "}
+                <span
+                  style={{
+                    fontWeight: 700,
+                    background: "linear-gradient(90deg, #A78BFA, #6C35C9)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    backgroundClip: "text",
+                  }}
+                >
+                  Suresh Kumar
+                </span>
+                {", Founder, ElectroMart Hyderabad"}
               </div>
             </div>
           </div>

@@ -65,46 +65,26 @@ function Divider() {
 
 function ValueCard({ title, body, delay }: { title: string; body: string; delay: number }) {
   const { ref, visible } = useScrollReveal();
-  const [hovered, setHovered] = useState(false);
   return (
     <div
       ref={ref}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
       style={{
-        background: "#ffffff",
-        border: `0.5px solid ${hovered ? "rgba(127,119,221,0.4)" : "#e5e7eb"}`,
-        borderRadius: 12,
-        padding: "1.15rem 1.25rem 1.1rem",
         opacity: visible ? 1 : 0,
         transform: visible ? "translateX(0)" : "translateX(-20px)",
-        transition: `opacity 0.55s ${delay}ms ease, transform 0.55s ${delay}ms ease, border-color 0.2s ease`,
-        cursor: "default",
-        position: "relative",
+        transition: `opacity 0.55s ${delay}ms ease, transform 0.55s ${delay}ms ease`,
       }}
     >
-      <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#7F77DD", flexShrink: 0, position: "absolute", left: 18, top: 20 }} />
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
-        <div style={{ width: "100%" }}>
-          <p style={{
-            fontFamily: "'Geist', 'DM Sans', system-ui, sans-serif",
-            fontSize: 14,
-            fontWeight: 700,
-            color: "#111827",
-            margin: "0 0 5px",
-            textAlign: "center",
-          }}>{title}</p>
-          <p style={{
-            fontFamily: "'Geist', 'DM Sans', system-ui, sans-serif",
-            fontSize: 14,
-            fontWeight: 400,
-            color: "#6b7280",
-            lineHeight: 1.7,
-            margin: 0,
-            textAlign: "center",
-          }}>{body}</p>
-        </div>
-      </div>
+      <p style={{
+        fontFamily: "'Geist', 'DM Sans', system-ui, sans-serif",
+        fontSize: 15,
+        lineHeight: "26px",
+        color: "#000000",
+        margin: 0,
+        textAlign: "left",
+      }}>
+        <span style={{ fontWeight: 700, color: "#000000" }}>{title} </span>
+        {body}
+      </p>
     </div>
   );
 }
@@ -119,7 +99,7 @@ export default function AboutPage() {
           width: 100%;
           max-width: none;
           margin: 0 auto;
-          padding: 36px 24px 68px;
+          padding: 36px 48px 68px;
           background: #ffffff;
           overflow-x: clip;
           box-sizing: border-box;
@@ -207,24 +187,25 @@ export default function AboutPage() {
           margin-top: 6px;
         }
         .about-col-content { flex: 1; }
-        .about-story {
-          text-align: center;
-          justify-self: center;
-          align-items: center;
-        }
+
         .about-values {
           align-items: center;
         }
         .about-values > * {
-          width: min(100%, 760px);
+          width: 100%;
         }
-        .about-story p,
         .about-values p {
-          max-width: 760px;
+          max-width: none;
         }
 
+        /* Tablet */
+        @media (max-width: 900px) {
+          .about-shell { padding: 36px 32px 68px; }
+        }
+
+        /* Mobile */
         @media (max-width: 600px) {
-          .about-shell { padding: 28px 18px 56px; }
+          .about-shell { padding: 28px 24px 56px; }
           .about-hero { max-width: 100%; text-align: left; }
           .about-brand-row { gap: 10px; }
           .about-brand-mark { width: 48px; height: 48px; }
@@ -267,7 +248,7 @@ export default function AboutPage() {
         </AnimatedBlock>
 
         {/* Story */}
-        <div className="about-two-col">
+        <div className="about-two-col" style={{ maxWidth: 900, margin: "6px auto 0" }}>
           <div className="about-col-label">
             <AnimatedBlock delay={0}>
               <p style={{
@@ -285,16 +266,17 @@ export default function AboutPage() {
               </p>
             </AnimatedBlock>
           </div>
-          <div className="about-col-content about-story" style={{ display: "flex", flexDirection: "column", gap: "0.85rem" }}>
+          <div className="about-col-content" style={{ display: "flex", flexDirection: "column", gap: "0.85rem" }}>
             {storyParagraphs.map((para, i) => (
               <AnimatedBlock key={i} delay={i * 80}>
                 <p style={{
                   fontFamily: "'Geist', 'DM Sans', system-ui, sans-serif",
-                  fontSize: 14,
+                  fontSize: 15,
                   fontWeight: 400,
-                  lineHeight: 1.45,
-                  color: "#111827",
+                  lineHeight: "26px",
+                  color: "#000000",
                   margin: 0,
+                  textAlign: "left",
                 }}>{para}</p>
               </AnimatedBlock>
             ))}
@@ -304,7 +286,7 @@ export default function AboutPage() {
         <Divider />
 
         {/* Values */}
-        <div className="about-two-col">
+        <div className="about-two-col" style={{ maxWidth: 900, margin: "6px auto 0" }}>
           <div className="about-col-label">
             <AnimatedBlock delay={0}>
               <p style={{
@@ -322,7 +304,7 @@ export default function AboutPage() {
               </p>
             </AnimatedBlock>
           </div>
-          <div className="about-col-content about-values" style={{ display: "flex", flexDirection: "column", gap: "0.7rem" }}>
+          <div className="about-col-content about-values" style={{ display: "flex", flexDirection: "column", gap: "1.1rem" }}>
             {values.map((v, i) => (
               <ValueCard key={v.title} title={v.title} body={v.body} delay={i * 90} />
             ))}

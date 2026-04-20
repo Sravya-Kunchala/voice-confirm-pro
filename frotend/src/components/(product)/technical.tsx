@@ -69,7 +69,6 @@ const cards = [
   },
 ];
 
-// ─── Icon ──────────────────────────────────────────────────────────────────────
 function Icon({ children, hovered }: { children: React.ReactNode; hovered: boolean }) {
   return (
     <div
@@ -103,7 +102,6 @@ function Icon({ children, hovered }: { children: React.ReactNode; hovered: boole
   );
 }
 
-// ─── Card ──────────────────────────────────────────────────────────────────────
 function SpecCard({
   card,
   visible,
@@ -130,30 +128,19 @@ function SpecCard({
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(20px)",
         transition: `opacity 0.55s ease ${delay}s, transform 0.55s ease ${delay}s, background 0.25s`,
-        outline: hovered ? "1px solid #7b6fba55" : "1px solid transparent",
+        borderRight: "1px solid #1e1f35",
+        borderBottom: "1px solid #1e1f35",
+        height: "100%",
+        boxSizing: "border-box",
       }}
     >
       <Icon hovered={hovered}>{card.icon}</Icon>
 
-      <div
-        style={{
-          fontSize: 16,
-          fontWeight: 600,
-          color: "#ffffff",
-          lineHeight: 1.3,
-        }}
-      >
+      <div style={{ fontSize: 16, fontWeight: 600, color: "#ffffff", lineHeight: 1.3 }}>
         {card.title}
       </div>
 
-      <div
-        style={{
-          fontSize: 13,
-          lineHeight: 1.7,
-          color: "#8a8baa",
-          flex: 1,
-        }}
-      >
+      <div style={{ fontSize: 13, lineHeight: 1.7, color: "#8a8baa", flex: 1 }}>
         {card.desc}
       </div>
 
@@ -181,20 +168,16 @@ function SpecCard({
   );
 }
 
-// ─── Root ──────────────────────────────────────────────────────────────────────
 export default function TechnicalSpecs() {
   const [eyeVisible, setEyeVisible] = useState(false);
   const [headVisible, setHeadVisible] = useState(false);
-  const [cardVisible, setCardVisible] = useState<boolean[]>(
-    Array(cards.length).fill(false)
-  );
+  const [cardVisible, setCardVisible] = useState<boolean[]>(Array(cards.length).fill(false));
   const gridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href =
-      "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap";
+    link.href = "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap";
     document.head.appendChild(link);
     return () => { document.head.removeChild(link); };
   }, []);
@@ -212,9 +195,7 @@ export default function TechnicalSpecs() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const idx = parseInt(
-              (entry.target as HTMLElement).dataset.cardIdx ?? "-1"
-            );
+            const idx = parseInt((entry.target as HTMLElement).dataset.cardIdx ?? "-1");
             if (idx >= 0) {
               setCardVisible((prev) => {
                 const next = [...prev];
@@ -284,14 +265,14 @@ export default function TechnicalSpecs() {
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-            gap: 2,
+            gap: 0,
             background: "#1a1b2e",
             borderRadius: 12,
             overflow: "hidden",
           }}
         >
           {cards.map((card, i) => (
-            <div key={i} data-card-idx={i}>
+            <div key={i} data-card-idx={i} style={{ display: "flex" }}>
               <SpecCard card={card} visible={cardVisible[i]} delay={i * 0.08} />
             </div>
           ))}

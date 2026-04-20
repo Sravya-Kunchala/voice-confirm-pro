@@ -12,19 +12,11 @@ const TwilioIcon = () => (
 );
 
 const VonageIcon = () => (
-  <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-    <rect width="36" height="36" rx="6" fill="#1A1A2E" fillOpacity="0.06" />
-    <path d="M10 10 L18 26 L26 10" stroke="#1A1A2E" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-  </svg>
+  <img src="/vonage.svg" alt="Vonage" width="36" height="36" />
 );
 
 const AWSPollyIcon = () => (
-  <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-    <rect width="40" height="40" rx="8" fill="#FF9900" fillOpacity="0.1" />
-    <ellipse cx="20" cy="20" rx="10" ry="13" stroke="#FF9900" strokeWidth="2" fill="none" />
-    <line x1="20" y1="7" x2="20" y2="33" stroke="#FF9900" strokeWidth="2" />
-    <path d="M10 20 Q15 17 20 20 Q25 23 30 20" stroke="#FF9900" strokeWidth="1.5" fill="none" />
-  </svg>
+  <img src="/aws.svg" alt="AWS Polly" width="40" height="40" />
 );
 
 const ElevenLabsIcon = () => (
@@ -127,33 +119,38 @@ function Card({
         transform: visible ? "translateY(0)" : "translateY(28px)",
         transition: `opacity 0.55s ease ${delay}s, transform 0.55s cubic-bezier(0.22,1,0.36,1) ${delay}s, border-color 0.25s ease, box-shadow 0.25s ease`,
         boxShadow: hovered
-          ? `0 8px 32px rgba(0,0,0,0.10), 0 0 0 0px ${accent}22`
+          ? `0 8px 32px rgba(0,0,0,0.10)`
           : "0 1px 4px rgba(0,0,0,0.04)",
         flex: 1,
         minWidth: 0,
       }}
     >
-      {/* Icon */}
+      {/* Icon + Name on same row — left aligned, matching image 1 */}
       <div style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? "scale(1)" : "scale(0.7)",
-        transition: `opacity 0.4s ease ${delay + 0.15}s, transform 0.4s cubic-bezier(0.34,1.56,0.64,1) ${delay + 0.15}s`,
-      }}>
-        {icon}
-      </div>
-
-      {/* Name */}
-      <div style={{
-        fontFamily: "'DM Sans', sans-serif",
-        fontSize: 20,
-        fontWeight: 700,
-        color: "#0F0F0F",
-        letterSpacing: "-0.2px",
+        display: "flex",
+        alignItems: "center",
+        gap: 14,
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(8px)",
-        transition: `opacity 0.4s ease ${delay + 0.2}s, transform 0.4s ease ${delay + 0.2}s`,
+        transition: `opacity 0.4s ease ${delay + 0.15}s, transform 0.4s ease ${delay + 0.15}s`,
       }}>
-        {name}
+        <div style={{
+          flexShrink: 0,
+          transform: visible ? "scale(1)" : "scale(0.7)",
+          transition: `transform 0.4s cubic-bezier(0.34,1.56,0.64,1) ${delay + 0.15}s`,
+        }}>
+          {icon}
+        </div>
+        <div style={{
+          fontFamily: "'Playfair Display', serif",
+          fontSize: 24,
+          fontWeight: 700,
+          color: "#131B2E",
+          lineHeight: "32px",
+          letterSpacing: "0px",
+        }}>
+          {name}
+        </div>
       </div>
 
       {/* Desc */}
@@ -217,12 +214,13 @@ function Section({
 
   return (
     <div ref={ref} style={{ marginBottom: 64 }}>
-      {/* Section header */}
+      {/* Section header — left aligned matching image 1 */}
       <div style={{
         marginBottom: 28,
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(16px)",
         transition: "opacity 0.5s ease 0s, transform 0.5s ease 0s",
+        textAlign: "left",
       }}>
         <h2 style={{
           fontFamily: "'DM Sans', sans-serif",
@@ -267,9 +265,9 @@ function Section({
 
 export default function Integrationsection() {
   return (
-    <div style={{ background: "#F0EDE6", minHeight: "100vh", padding: "72px 24px 80px" }}>
+    <div style={{ background: "#F0EDE6", minHeight: "100vh", padding: "72px 0px 80px" }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600;700&display=swap');
         * { box-sizing: border-box; }
 
         .int-grid {

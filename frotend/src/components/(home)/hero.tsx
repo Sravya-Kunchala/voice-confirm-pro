@@ -267,12 +267,11 @@ const INJECTED_CSS = `
 .vc-dashboard-wrap { animation: vc-dashboard-rise 0.8s cubic-bezier(0.22,1,0.36,1) 0.72s both; }
 
 .vc-bg-bars > div {
-  transform-origin: bottom center;
+  transform-origin: top center;
   animation: vc-bar-grow 0.65s cubic-bezier(0.22,1,0.36,1) both;
 }
 ${barDelays}
 
-/* Stat slide-in — driven by JS adding .vc-stat-visible */
 .vc-stat-item {
   opacity: 0;
   transform: translateY(14px);
@@ -330,13 +329,11 @@ export default function HeroSection() {
   const animatedRef = useRef(false);
   const rafRef = useRef<number | null>(null);
 
-  // Display values — initialised to "0" (with prefix/suffix shells)
   const [displayValues, setDisplayValues] = useState<string[]>(
     statConfigs.map((c) => c.prefix + "0" + c.suffix)
   );
   const [statVisible, setStatVisible] = useState<boolean[]>([false, false, false, false]);
 
-  // Inject CSS
   useEffect(() => {
     const style = document.createElement("style");
     style.textContent = INJECTED_CSS;
@@ -348,11 +345,9 @@ export default function HeroSection() {
     };
   }, []);
 
-  // IntersectionObserver — trigger count-up when stats bar enters viewport
   useEffect(() => {
     const el = statsBarRef.current;
     if (!el) return;
-
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && !animatedRef.current) {
@@ -363,15 +358,12 @@ export default function HeroSection() {
       },
       { threshold: 0.25 }
     );
-
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
 
   function startAnimation() {
     const startTime = performance.now();
-
-    // Stagger the slide-in visibility per item
     statConfigs.forEach((_, i) => {
       setTimeout(() => {
         setStatVisible((prev) => {
@@ -381,23 +373,18 @@ export default function HeroSection() {
         });
       }, i * 130);
     });
-
     function tick(now: number) {
       const elapsed = now - startTime;
       const t = Math.min(elapsed / ANIM_DURATION, 1);
       const eased = easeOutExpo(t);
-
       setDisplayValues(statConfigs.map((c) => formatStat(c, eased)));
-
       if (t < 1) {
         rafRef.current = requestAnimationFrame(tick);
       }
     }
-
     rafRef.current = requestAnimationFrame(tick);
   }
 
-  // Cleanup RAF on unmount
   useEffect(() => {
     return () => {
       if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
@@ -407,22 +394,29 @@ export default function HeroSection() {
   return (
     <section style={styles.section} className="vc-section">
 
-      {/* Background bars */}
+      {/* Background bars — stretch full height top to bottom */}
       <div
         className="vc-bg-bars"
         style={{
           position: "absolute",
-          top: 0, left: 0, right: 0, height: "100%",
+          top: 0, left: 0, right: 0, bottom: 0,
           zIndex: 0,
           pointerEvents: "none",
           display: "flex",
-          alignItems: "flex-start",
+          alignItems: "stretch",   /* ← key fix: stretch not flex-start */
           overflow: "hidden",
           opacity: 0.3,
         }}
       >
         {Array.from({ length: BAR_COUNT }).map((_, i) => (
-          <div key={i} style={{ width: "103px", flexShrink: 0, height: getBarHeight(i) }}>
+          <div
+            key={i}
+            style={{
+              width: "103px",
+              flexShrink: 0,
+              height: "100%",       /* ← key fix: always full height */
+            }}
+          >
             <svg
               width="103"
               height="100%"
@@ -452,13 +446,11 @@ export default function HeroSection() {
       {/* Main content */}
       <div style={styles.content}>
 
-        {/* Badge */}
         <div style={styles.badge} className="vc-badge">
           <span style={styles.badgeDot} className="vc-badge-dot-anim" />
           THE #1 WOOCOMMERCE VOICE CONFIRMATION PLUGIN FOR COD STORES
         </div>
 
-        {/* Heading */}
         <div style={styles.headingWrap} className="vc-heading-wrap-anim">
           <h1 style={styles.heading} className="vc-heading">
             Your COD Orders Are{" "}
@@ -467,14 +459,12 @@ export default function HeroSection() {
           </h1>
         </div>
 
-        {/* Subtext */}
         <p style={styles.subtext} className="vc-subtext">
           VoiceConfirm Pro automatically calls your customers the moment they place a Cash on
           Delivery order — confirms delivery, collects responses, and updates WooCommerce.
           Zero human effort. Zero missed confirmations.
         </p>
 
-        {/* CTA Buttons */}
         <div style={styles.ctaRow} className="vc-cta-row">
           <a href="#free-trial" style={styles.ctaPrimary} className="vc-cta-primary">
             Start Your Free 14-Day Trial →
@@ -485,7 +475,6 @@ export default function HeroSection() {
           </a>
         </div>
 
-        {/* Trust badges */}
         <div style={styles.trustRow} className="vc-trust-row">
           {trustItems.map((item, idx) => (
             <span
@@ -499,7 +488,6 @@ export default function HeroSection() {
           ))}
         </div>
 
-        {/* Dashboard image */}
         <div
           className="vc-dashboard-wrap"
           style={{ width: "100%", maxWidth: "860px", margin: "0 auto", padding: "0 24px" }}
@@ -514,7 +502,6 @@ export default function HeroSection() {
 
         <div style={{ height: "40px", width: "100%" }} />
 
-        {/* Stats bar — animated count-up */}
         <div
           ref={statsBarRef}
           className="vc-stats-bar"

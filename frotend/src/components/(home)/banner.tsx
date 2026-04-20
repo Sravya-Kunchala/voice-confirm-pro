@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 const CheckIcon = () => (
   <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
@@ -13,87 +13,19 @@ const CheckIcon = () => (
   </svg>
 );
 
-type Dot = {
-  x: number;
-  y: number;
-  r: number;
-  alpha: number;
-  phase: number;
-  speed: number;
-};
-
 export default function HeroBanner() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const rafRef = useRef<number>(0);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // slight delay so CSS animations play on first paint
     const id = setTimeout(() => setMounted(true), 50);
     return () => clearTimeout(id);
-  }, []);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    const resize = () => {
-      const dpr = window.devicePixelRatio || 1;
-      canvas.width = canvas.offsetWidth * dpr;
-      canvas.height = canvas.offsetHeight * dpr;
-      ctx.scale(dpr, dpr);
-    };
-    resize();
-    window.addEventListener("resize", resize);
-
-    const dots: Dot[] = Array.from({ length: 44 }, () => ({
-      x: Math.random() * (canvas.offsetWidth || 900),
-      y: Math.random() * (canvas.offsetHeight || 300),
-      r: Math.random() * 20 + 7,
-      alpha: Math.random() * 0.13 + 0.04,
-      phase: Math.random() * Math.PI * 2,
-      speed: Math.random() * 0.4 + 0.25,
-    }));
-
-    let t = 0;
-    const draw = () => {
-      const w = canvas.offsetWidth;
-      const h = canvas.offsetHeight;
-      ctx.clearRect(0, 0, w, h);
-      t += 0.016;
-
-      dots.forEach((d) => {
-        const pulse = (Math.sin(t * d.speed + d.phase) + 1) / 2;
-        const outerR = d.r * (0.85 + pulse * 0.3);
-        const alpha = d.alpha * (0.4 + pulse * 0.6);
-
-        ctx.beginPath();
-        ctx.arc(d.x, d.y, outerR, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(139,92,246,${alpha})`;
-        ctx.lineWidth = 1;
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.arc(d.x, d.y, d.r * 0.28 * (0.7 + pulse * 0.5), 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(139,92,246,${alpha * 0.55})`;
-        ctx.fill();
-      });
-
-      rafRef.current = requestAnimationFrame(draw);
-    };
-    draw();
-
-    return () => {
-      cancelAnimationFrame(rafRef.current);
-      window.removeEventListener("resize", resize);
-    };
   }, []);
 
   return (
     <>
       <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=IBM+Plex+Sans:wght@500&display=swap');
+
         @keyframes fadeUp {
           from { opacity: 0; transform: translateY(24px); }
           to   { opacity: 1; transform: translateY(0); }
@@ -166,10 +98,10 @@ export default function HeroBanner() {
           alignItems: "center",
           justifyContent: "center",
           overflow: "hidden",
-          fontFamily: "Georgia, serif",
+          fontFamily: "'Playfair Display', serif",
         }}
       >
-        {/* bg.svg — place your file at /public/bg.svg */}
+        {/* Background image */}
         <img
           src="/bg.png"
           alt=""
@@ -180,20 +112,8 @@ export default function HeroBanner() {
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            opacity: 0.015,
+            opacity: 0.001,
             animation: mounted ? "fadeIn 1.4s ease 0.1s forwards" : undefined,
-          }}
-        />
-
-        {/* Canvas: pulsing dots */}
-        <canvas
-          ref={canvasRef}
-          style={{
-            position: "absolute",
-            inset: 0,
-            width: "100%",
-            height: "100%",
-            pointerEvents: "none",
           }}
         />
 
@@ -207,14 +127,17 @@ export default function HeroBanner() {
             maxWidth: "600px",
           }}
         >
-          {/* Heading with shimmer gradient */}
+          {/* Heading — Playfair Display, 700, 41.6px, lh 45.76px, ls -0.42px */}
           <h1
             style={{
-              fontSize: "clamp(24px, 5vw, 40px)",
+              fontFamily: "'Playfair Display', serif",
+              fontSize: "41.6px",
               fontWeight: 700,
+              lineHeight: "45.76px",
+              letterSpacing: "-0.42px",
+              textAlign: "center",
               margin: "0 0 14px",
-              letterSpacing: "-0.5px",
-              lineHeight: 1.2,
+              color: "#FFFFFF",
               background:
                 "linear-gradient(90deg,#ddd6fe 0%,#ffffff 35%,#c4b5fd 65%,#ddd6fe 100%)",
               backgroundSize: "200% auto",
@@ -228,19 +151,23 @@ export default function HeroBanner() {
             }}
           >
             Start Your Free 14-Day Trial{" "}
-            <span style={{ fontSize: "0.72em", opacity: 0.7 }}>↝</span>
+            <svg viewBox="0 0 32 16" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: "inline-block", verticalAlign: "middle", width: "0.75em", height: "0.38em", marginLeft: "4px" }}>
+              <path d="M1 8 H28 M20 1 L29 8 L20 15" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
           </h1>
 
-          {/* Subheading */}
+          {/* Subheading — IBM Plex Sans, 500, 16px, lh 27.52px, ls 0% */}
           <p
             style={{
-              fontSize: "15px",
-              color: "rgba(255,255,255,0.5)",
-              margin: "0 0 34px",
-              lineHeight: 1.7,
-              fontFamily: "sans-serif",
-              fontWeight: 400,
+              fontFamily: "'IBM Plex Sans', sans-serif",
+              fontSize: "16px",
+              fontWeight: 500,
+              lineHeight: "27.52px",
+              letterSpacing: "0%",
+              textAlign: "center",
+              color: "#FFFFFF",
               opacity: 0,
+              margin: "0 0 34px",
               animation: mounted
                 ? "fadeUp 0.75s ease 0.35s forwards"
                 : undefined,
@@ -287,7 +214,7 @@ export default function HeroBanner() {
                     gap: "6px",
                     fontSize: "12px",
                     color: "rgba(255,255,255,0.35)",
-                    fontFamily: "sans-serif",
+                    fontFamily: "'IBM Plex Sans', sans-serif",
                     opacity: 0,
                     animation: mounted
                       ? `badgePop 0.55s ease ${0.8 + i * 0.15}s forwards`

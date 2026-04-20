@@ -204,9 +204,12 @@ function FAQItem({
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [showMore, setShowMore] = useState(false);
   const { ref: sectionRef, inView } = useInView(0.08);
 
   const toggle = (i: number) => setOpenIndex(openIndex === i ? null : i);
+  const visibleFaqs = faqs.slice(0, 5);
+  const remainingFaqs = faqs.slice(5);
 
   return (
     <section
@@ -297,7 +300,7 @@ export default function FAQ() {
 
         {/* Items */}
         <div>
-          {faqs.map((faq, i) => (
+          {visibleFaqs.map((faq, i) => (
             <FAQItem
               key={i}
               faq={faq}
@@ -308,6 +311,44 @@ export default function FAQ() {
               sectionInView={inView}
             />
           ))}
+
+          {showMore &&
+            remainingFaqs.map((faq, i) => {
+              const index = i + visibleFaqs.length;
+              return (
+                <FAQItem
+                  key={index}
+                  faq={faq}
+                  index={index}
+                  isOpen={openIndex === index}
+                  onToggle={() => toggle(index)}
+                  animDelay={Math.min(index * 40, 400)}
+                  sectionInView={inView}
+                />
+              );
+            })}
+
+          {remainingFaqs.length > 0 && (
+            <button
+              type="button"
+              onClick={() => setShowMore((prev) => !prev)}
+              style={{
+                marginTop: "18px",
+                border: "none",
+                background: "transparent",
+                color: "#6C5CE7",
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: "15px",
+                fontWeight: 700,
+                cursor: "pointer",
+                padding: 0,
+                textDecoration: "underline",
+                textUnderlineOffset: "4px",
+              }}
+            >
+              {showMore ? "Show less" : "Click here to view more"}
+            </button>
+          )}
         </div>
       </div>
     </section>

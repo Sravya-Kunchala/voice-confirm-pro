@@ -161,22 +161,18 @@ function PlanCard({ plan, yearly, delay }: { plan: Plan; yearly: boolean; delay:
       }}
     >
       {plan.popular && (
-        <div
-          style={{
-            position: "absolute",
-            top: -13,
-            left: "50%",
-            transform: "translateX(-50%)",
-            background: "linear-gradient(90deg,#3b82f6,#2563eb)",
-            color: "#fff",
-            padding: "4px 16px",
-            borderRadius: 999,
-            fontSize: 10,
-            fontWeight: 700,
-            letterSpacing: "0.1em",
-            whiteSpace: "nowrap",
-          }}
-        >
+        <div style={{
+          position: "absolute",
+          top: -13, left: "50%",
+          transform: "translateX(-50%)",
+          background: "linear-gradient(90deg,#3b82f6,#2563eb)",
+          color: "#fff",
+          padding: "4px 16px",
+          borderRadius: 999,
+          fontSize: 10, fontWeight: 700,
+          letterSpacing: "0.1em",
+          whiteSpace: "nowrap",
+        }}>
           MOST POPULAR
         </div>
       )}
@@ -194,52 +190,31 @@ function PlanCard({ plan, yearly, delay }: { plan: Plan; yearly: boolean; delay:
           <span style={{ fontSize: 12, color: "#94a3b8" }}>/month</span>
         </div>
         {yearly ? (
-          <div style={{ marginTop: 5, color: "#16a34a", fontSize: 11 }}>
-            Billed annually · Save 30%
-          </div>
+          <div style={{ marginTop: 5, color: "#16a34a", fontSize: 11 }}>Billed annually · Save 30%</div>
         ) : (
           <div style={{ marginTop: 5, color: "#94a3b8", fontSize: 11 }}>Billed monthly</div>
         )}
       </div>
 
-      <button
-        style={{
-          width: "100%",
-          borderRadius: 10,
-          padding: "12px 14px",
-          border: plan.popular ? "none" : "1.5px solid #2563eb",
-          background: plan.popular ? "linear-gradient(90deg,#3b82f6,#2563eb)" : "transparent",
-          color: plan.popular ? "#fff" : "#2563eb",
-          fontSize: 13.5,
-          fontWeight: 700,
-          marginBottom: 20,
-          cursor: "pointer",
-          letterSpacing: "0.01em",
-        }}
-      >
+      <button style={{
+        width: "100%", borderRadius: 10, padding: "12px 14px",
+        border: plan.popular ? "none" : "1.5px solid #2563eb",
+        background: plan.popular ? "linear-gradient(90deg,#3b82f6,#2563eb)" : "transparent",
+        color: plan.popular ? "#fff" : "#2563eb",
+        fontSize: 13.5, fontWeight: 700, marginBottom: 20,
+        cursor: "pointer", letterSpacing: "0.01em",
+      }}>
         {plan.ctaLabel}
       </button>
 
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 9,
-          borderTop: "1px solid #f1f5f9",
-          paddingTop: 16,
-          flex: 1,
-        }}
-      >
+      <div style={{
+        display: "flex", flexDirection: "column", gap: 9,
+        borderTop: "1px solid #f1f5f9", paddingTop: 16, flex: 1,
+      }}>
         {plan.features.map((f, i) => (
           <div key={i} style={{ display: "flex", gap: 8, alignItems: "flex-start" }}>
             <CheckIcon included={f.included} />
-            <span
-              style={{
-                fontSize: 12,
-                lineHeight: 1.5,
-                color: f.included ? "#334155" : "#b0bec5",
-              }}
-            >
+            <span style={{ fontSize: 12, lineHeight: 1.5, color: f.included ? "#334155" : "#b0bec5" }}>
               {f.text}
             </span>
           </div>
@@ -251,23 +226,9 @@ function PlanCard({ plan, yearly, delay }: { plan: Plan; yearly: boolean; delay:
 
 function Toggle({ yearly, onChange }: { yearly: boolean; onChange: (v: boolean) => void }) {
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: 12,
-        justifyContent: "center",
-        marginTop: 24,
-      }}
-    >
+    <div style={{ display: "flex", alignItems: "center", gap: 12, justifyContent: "center" }}>
       <span
-        style={{
-          fontSize: 13,
-          fontWeight: yearly ? 400 : 600,
-          color: yearly ? "rgba(255,255,255,0.6)" : "#fff",
-          cursor: "pointer",
-          transition: "color 0.2s",
-        }}
+        style={{ fontSize: 13, fontWeight: yearly ? 400 : 600, color: yearly ? "rgba(255,255,255,0.6)" : "#fff", cursor: "pointer" }}
         onClick={() => onChange(false)}
       >
         Monthly
@@ -275,54 +236,28 @@ function Toggle({ yearly, onChange }: { yearly: boolean; onChange: (v: boolean) 
       <button
         onClick={() => onChange(!yearly)}
         style={{
-          width: 44,
-          height: 24,
-          borderRadius: 999,
-          border: "none",
+          width: 44, height: 24, borderRadius: 999, border: "none",
           background: yearly ? "#fff" : "rgba(255,255,255,0.3)",
-          position: "relative",
-          cursor: "pointer",
-          transition: "background 0.25s",
-          padding: 0,
-          flexShrink: 0,
+          position: "relative", cursor: "pointer", transition: "background 0.25s", padding: 0, flexShrink: 0,
         }}
       >
-        <span
-          style={{
-            position: "absolute",
-            top: 3,
-            left: yearly ? 23 : 3,
-            width: 18,
-            height: 18,
-            borderRadius: "50%",
-            background: yearly ? "#2563eb" : "#fff",
-            transition: "left 0.25s, background 0.25s",
-            display: "block",
-          }}
-        />
+        <span style={{
+          position: "absolute", top: 3, left: yearly ? 23 : 3,
+          width: 18, height: 18, borderRadius: "50%",
+          background: yearly ? "#2563eb" : "#fff",
+          transition: "left 0.25s, background 0.25s", display: "block",
+        }} />
       </button>
       <span
-        style={{
-          fontSize: 13,
-          fontWeight: yearly ? 600 : 400,
-          color: yearly ? "#fff" : "rgba(255,255,255,0.6)",
-          cursor: "pointer",
-          transition: "color 0.2s",
-        }}
+        style={{ fontSize: 13, fontWeight: yearly ? 600 : 400, color: yearly ? "#fff" : "rgba(255,255,255,0.6)", cursor: "pointer" }}
         onClick={() => onChange(true)}
       >
         Yearly{" "}
-        <span
-          style={{
-            background: "rgba(255,255,255,0.18)",
-            borderRadius: 999,
-            padding: "2px 8px",
-            fontSize: 10,
-            fontWeight: 700,
-            letterSpacing: "0.04em",
-            marginLeft: 2,
-          }}
-        >
+        <span style={{
+          background: "rgba(255,255,255,0.18)", borderRadius: 999,
+          padding: "2px 8px", fontSize: 10, fontWeight: 700,
+          letterSpacing: "0.04em", marginLeft: 2,
+        }}>
           Save up to 30%
         </span>
       </span>
@@ -332,174 +267,72 @@ function Toggle({ yearly, onChange }: { yearly: boolean; onChange: (v: boolean) 
 
 export default function PricingPage() {
   const [yearly, setYearly] = useState(false);
-  const ltdRef = useRef<HTMLDivElement>(null);
-  const heroRef = useRef<HTMLDivElement>(null);
-  const [ltdVisible, setLtdVisible] = useState(false);
   const [heroVisible, setHeroVisible] = useState(false);
 
   useEffect(() => {
     const link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href =
-      "https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&display=swap";
+    link.href = "https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Playfair+Display:wght@800&family=Outfit:wght@400;600;700&display=swap";
     document.head.appendChild(link);
-
     const t = setTimeout(() => setHeroVisible(true), 80);
-
-    const io = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setLtdVisible(true); },
-      { threshold: 0.15 }
-    );
-    if (ltdRef.current) io.observe(ltdRef.current);
-
-    return () => {
-      clearTimeout(t);
-      io.disconnect();
-      if (document.head.contains(link)) document.head.removeChild(link);
-    };
+    return () => { clearTimeout(t); if (document.head.contains(link)) document.head.removeChild(link); };
   }, []);
 
   return (
-    <div
-      style={{
-        background: "#f0f4fa",
-        minHeight: "100vh",
-        fontFamily: "'Syne', sans-serif",
-      }}
-    >
+    <div style={{ background: "#f0f4fa", minHeight: "100vh", fontFamily: "'Syne', sans-serif", paddingBottom: 56 }}>
       <style>{`
-        @keyframes shimmer {
-          0% { background-position: -600px 0; }
-          100% { background-position: 600px 0; }
-        }
-        @keyframes pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.65; }
-        }
         @keyframes fadeUp {
           from { opacity: 0; transform: translateY(18px); }
           to { opacity: 1; transform: translateY(0); }
         }
       `}</style>
 
-      {/* ── Hero ── */}
-      <section
-        style={{
-          background: "linear-gradient(160deg, #3b82f6 0%, #2563eb 55%, #1d4ed8 100%)",
-          padding: "56px 24px 100px",
+      {/* ── Outer wrapper: SVG as bg, tag sits on top naturally ── */}
+      <div style={{
+        position: "relative",
+        backgroundImage: "url('/group.svg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center top",
+        backgroundRepeat: "no-repeat",
+      }}>
+
+        {/* PRICING tag — its own row, no background needed, SVG shows through */}
+        <div style={{
+          display: "flex",
+          justifyContent: "center",
+          padding: "20px 24px 16px",
+          position: "relative",
+          zIndex: 1,
+          opacity: heroVisible ? 1 : 0,
+          transform: heroVisible ? "translateY(0)" : "translateY(-10px)",
+          transition: "opacity 0.5s ease 0.1s, transform 0.5s ease 0.1s",
+        }}>
+          
+        </div>
+
+        {/* ── Hero ── */}
+        <section style={{
+          padding: "0 24px 100px",
           textAlign: "center",
           position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        {/* decorative circles */}
-        <div
-          style={{
-            position: "absolute", top: -80, right: -80,
-            width: 320, height: 320, borderRadius: "50%",
-            background: "rgba(255,255,255,0.06)", pointerEvents: "none",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute", bottom: -60, left: -60,
-            width: 260, height: 260, borderRadius: "50%",
-            background: "rgba(255,255,255,0.05)", pointerEvents: "none",
-          }}
-        />
-
-        <div
-          ref={heroRef}
-          style={{
-            maxWidth: 600,
-            margin: "0 auto",
+        }}>
+          <div style={{
+            position: "relative",
+            zIndex: 1,
             opacity: heroVisible ? 1 : 0,
             transform: heroVisible ? "translateY(0)" : "translateY(20px)",
             transition: "opacity 0.6s ease, transform 0.6s ease",
-          }}
-        >
-          {/* pill badge */}
-          <div
-            style={{
-              display: "inline-block",
-              background: "rgba(255,255,255,0.18)",
-              border: "1px solid rgba(255,255,255,0.3)",
-              color: "#fff",
-              fontSize: 11,
-              fontWeight: 700,
-              letterSpacing: "0.14em",
-              padding: "5px 16px",
-              borderRadius: 999,
-              marginBottom: 20,
-            }}
-          >
-            PRICING
+            marginTop: 300,
+          }}>
+            <Toggle yearly={yearly} onChange={setYearly} />
           </div>
+        </section>
 
-          <h1
-            style={{
-              fontSize: "clamp(30px, 5vw, 46px)",
-              fontWeight: 800,
-              color: "#fff",
-              lineHeight: 1.1,
-              margin: "0 0 16px",
-              letterSpacing: "-0.02em",
-            }}
-          >
-            Simple, Transparent Pricing
-          </h1>
-
-          <p
-            style={{
-              fontSize: 14,
-              lineHeight: 1.75,
-              color: "rgba(255,255,255,0.78)",
-              maxWidth: 460,
-              margin: "0 auto 6px",
-            }}
-          >
-            No per-call surprises. No hidden platform fees. Pay for the plan that fits your
-            order volume and we handle the rest.
-          </p>
-
-          <p
-            style={{
-              fontSize: 12.5,
-              lineHeight: 1.7,
-              color: "rgba(255,255,255,0.55)",
-              maxWidth: 480,
-              margin: "0 auto",
-            }}
-          >
-            Your telephony costs (Twilio/Vonage) are separate and typically range from ₹2–8 per
-            call depending on your provider plan.{" "}
-            <strong style={{ color: "rgba(255,255,255,0.75)", fontWeight: 700 }}>
-              VoiceConfirm Pro
-            </strong>{" "}
-            does not mark up your telephony costs.
-          </p>
-
-          <Toggle yearly={yearly} onChange={setYearly} />
-        </div>
-      </section>
+      </div>
 
       {/* ── Cards ── */}
-      <section
-        style={{
-          maxWidth: 1080,
-          margin: "0 auto",
-          padding: "0 20px",
-          transform: "translateY(-60px)",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            gap: 20,
-            flexWrap: "wrap",
-            alignItems: "stretch",
-          }}
-        >
+      <section style={{ maxWidth: 1080, margin: "-60px auto 0", padding: "0 20px", position: "relative", zIndex: 2 }}>
+        <div style={{ display: "flex", gap: 20, flexWrap: "wrap", alignItems: "stretch" }}>
           {PLANS.map((plan, i) => (
             <PlanCard key={plan.id} plan={plan} yearly={yearly} delay={i * 0.1} />
           ))}
@@ -507,138 +340,105 @@ export default function PricingPage() {
       </section>
 
       {/* ── Lifetime Deal ── */}
-      <section
-        style={{
-          maxWidth: 800,
-          margin: "-24px auto 60px",
-          padding: "0 20px",
-        }}
-      >
-        <div
-          ref={ltdRef}
-          style={{
-            width: "100%",
-            maxWidth: 800,
-            background: "linear-gradient(180deg, #0C1220 0%, #161F33 100%)",
-            borderRadius: 20,
-            padding: "64px 48px 48px",
+      <section style={{ maxWidth: 920, margin: "24px auto 0", padding: "0 20px" }}>
+        <div style={{
+          width: "100%",
+          background: "linear-gradient(160deg, #0f1535 0%, #111827 60%, #0d1230 100%)",
+          borderRadius: 24,
+          border: "1px solid rgba(255,255,255,0.07)",
+          boxShadow: "0 24px 60px rgba(0,0,0,0.3)",
+          padding: "56px 40px 52px",
+          textAlign: "center",
+          position: "relative",
+          overflow: "hidden",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: 20,
+        }}>
+          <div style={{
+            fontFamily: "'Playfair Display', Georgia, serif",
+            fontSize: 28,
+            fontWeight: 800,
+            color: "#FFFFFF",
+            lineHeight: "44.8px",
             textAlign: "center",
-            position: "relative",
-            overflow: "hidden",
-            display: "flex",
-            flexDirection: "column",
-            gap: 12,
-            transform: ltdVisible ? "translateY(0)" : "translateY(28px)",
-            opacity: ltdVisible ? 1 : 0,
-            transition: "transform 0.6s ease, opacity 0.6s ease",
-          }}
-        >
-          {/* shimmer line */}
-          <div
-            style={{
-              position: "absolute",
-              top: 0, left: 0, right: 0,
-              height: 2,
-              background:
-                "linear-gradient(90deg, transparent 0%, #3b82f6 30%, #93c5fd 50%, #3b82f6 70%, transparent 100%)",
-              backgroundSize: "600px 2px",
-              animation: "shimmer 2.5s linear infinite",
-            }}
-          />
-
-          <div
-            style={{
-              display: "inline-block",
-              minWidth: 175,
-              fontSize: 26,
-              lineHeight: 1,
-              fontWeight: 800,
-              color: "#fff",
-              textAlign: "center",
-              whiteSpace: "nowrap",
-              margin: "0 auto",
-            }}
-          >
+          }}>
             Lifetime Deal
           </div>
 
-          <div
-            style={{
-              display: "flex",
-              alignItems: "baseline",
-              gap: 10,
-              justifyContent: "center",
-              marginBottom: 0,
-            }}
-          >
-            <span
-              style={{
-                color: "#fff",
-                fontSize: "clamp(28px, 3.6vw, 44px)",
-                fontWeight: 800,
-                lineHeight: 1,
-              }}
-            >
+          <div style={{ display: "flex", alignItems: "baseline", gap: 12, justifyContent: "center" }}>
+            <span style={{
+              color: "#fff",
+              fontSize: "clamp(32px, 4vw, 48px)",
+              fontWeight: 800,
+              lineHeight: 1,
+              letterSpacing: "-1px",
+              fontFamily: "'Playfair Display', Georgia, serif",
+            }}>
               ₹24,999
             </span>
-            <span style={{ color: "#94a3b8", fontSize: 13 }}>one-time payment</span>
+            <span style={{
+              fontFamily: "'Outfit', sans-serif",
+              fontWeight: 400,
+              fontSize: 16,
+              lineHeight: "25.6px",
+              color: "#8B95A8",
+            }}>one-time payment</span>
           </div>
 
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 10,
-              marginBottom: 0,
-            }}
-          >
-            <span
-              style={{
-                background: "rgba(239,68,68,0.15)",
-                border: "1px solid rgba(239,68,68,0.3)",
-                color: "#f87171",
-                fontSize: 10,
-                fontWeight: 700,
-                letterSpacing: "0.1em",
-                padding: "4px 12px",
-                borderRadius: 999,
-                animation: "pulse 2s ease infinite",
-              }}
-            >
-              LIMITED
-            </span>
-            <span style={{ color: "#64748b", fontSize: 11 }}>
-              — 41 of 100 seats left
-            </span>
+          <div style={{
+            display: "inline-flex", alignItems: "center",
+            background: "rgba(99,102,241,0.2)",
+            border: "1px solid rgba(99,102,241,0.35)",
+            borderRadius: 999,
+            padding: "8px 20px",
+            fontSize: 12, fontWeight: 700,
+            color: "#a5b4fc",
+            letterSpacing: "0.06em",
+          }}>
+            LIMITED — 43 of 100 seats left
           </div>
 
-          <p
-            style={{
-              color: "#94a3b8",
-              fontSize: 12.5,
-              lineHeight: 1.6,
-              maxWidth: 520,
-              margin: "0 auto",
-            }}
-          >
+          <p style={{
+            fontFamily: "'Outfit', sans-serif",
+            fontWeight: 400,
+            fontSize: 14,
+            lineHeight: "23.8px",
+            color: "#8B95A8",
+            textAlign: "center",
+            maxWidth: 500,
+            margin: 0,
+          }}>
             Everything in Pro plan, forever. No monthly fees. Unlimited calls. Single site.
-            <br />
             All future updates included as long as VoiceConfirm Pro exists.
           </p>
 
           <button
             style={{
+              marginTop: 4,
               display: "inline-flex",
-              alignSelf: "center",
-              background: "linear-gradient(90deg,#3b82f6,#2563eb)",
+              alignItems: "center",
+              gap: 8,
+              background: "linear-gradient(90deg, #6366f1, #4f46e5)",
               border: "none",
               color: "#fff",
-              fontSize: 11,
+              fontSize: 15,
               fontWeight: 700,
-              padding: "8px 20px",
-              borderRadius: 10,
+              padding: "16px 40px",
+              borderRadius: 14,
               cursor: "pointer",
               letterSpacing: "0.01em",
+              boxShadow: "0 8px 28px rgba(99,102,241,0.45)",
+              transition: "transform 0.15s ease, box-shadow 0.15s ease",
+            }}
+            onMouseEnter={e => {
+              (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-2px)";
+              (e.currentTarget as HTMLButtonElement).style.boxShadow = "0 12px 36px rgba(99,102,241,0.55)";
+            }}
+            onMouseLeave={e => {
+              (e.currentTarget as HTMLButtonElement).style.transform = "translateY(0)";
+              (e.currentTarget as HTMLButtonElement).style.boxShadow = "0 8px 28px rgba(99,102,241,0.45)";
             }}
           >
             Grab Lifetime Deal →

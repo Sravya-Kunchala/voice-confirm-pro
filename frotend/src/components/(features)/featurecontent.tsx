@@ -1,6 +1,5 @@
 import { useEffect, ReactNode } from "react";
 
-/* ─── Types ─────────────────────────────────────────────── */
 interface Feature {
   number: number;
   tag: string;
@@ -10,7 +9,6 @@ interface Feature {
   icon: ReactNode;
 }
 
-/* ─── Scroll-reveal hook ─────────────────────────────────── */
 function useReveal() {
   useEffect(() => {
     const els = document.querySelectorAll<HTMLElement>(".reveal");
@@ -30,7 +28,6 @@ function useReveal() {
   }, []);
 }
 
-/* ─── Icons ──────────────────────────────────────────────── */
 const PhoneIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" width={28} height={28}>
     <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.0 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/>
@@ -47,7 +44,15 @@ const MicIcon = () => (
 const KeypadIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" width={28} height={28}>
     <rect x={2} y={3} width={20} height={18} rx={2}/>
-    <path d="M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/>
+    <circle cx={8}  cy={10} r={0.8} fill="currentColor" stroke="none"/>
+    <circle cx={12} cy={10} r={0.8} fill="currentColor" stroke="none"/>
+    <circle cx={16} cy={10} r={0.8} fill="currentColor" stroke="none"/>
+    <circle cx={8}  cy={14} r={0.8} fill="currentColor" stroke="none"/>
+    <circle cx={12} cy={14} r={0.8} fill="currentColor" stroke="none"/>
+    <circle cx={16} cy={14} r={0.8} fill="currentColor" stroke="none"/>
+    <circle cx={8}  cy={18} r={0.8} fill="currentColor" stroke="none"/>
+    <circle cx={12} cy={18} r={0.8} fill="currentColor" stroke="none"/>
+    <circle cx={16} cy={18} r={0.8} fill="currentColor" stroke="none"/>
   </svg>
 );
 
@@ -59,7 +64,9 @@ const ChatIcon = () => (
 
 const BarChartIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" width={28} height={28}>
-    <line x1={12} y1={20} x2={12} y2={10}/><line x1={18} y1={20} x2={18} y2={4}/><line x1={6} y1={20} x2={6} y2={16}/>
+    <line x1={12} y1={20} x2={12} y2={10}/>
+    <line x1={18} y1={20} x2={18} y2={4}/>
+    <line x1={6}  y1={20} x2={6}  y2={16}/>
   </svg>
 );
 
@@ -67,7 +74,9 @@ const FileIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" width={28} height={28}>
     <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
     <polyline points="14 2 14 8 20 8"/>
-    <line x1={16} y1={13} x2={8} y2={13}/><line x1={16} y1={17} x2={8} y2={17}/><polyline points="10 9 9 9 8 9"/>
+    <line x1={16} y1={13} x2={8} y2={13}/>
+    <line x1={16} y1={17} x2={8} y2={17}/>
+    <polyline points="10 9 9 9 8 9"/>
   </svg>
 );
 
@@ -81,10 +90,10 @@ const GearIcon = () => (
 const ShieldIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" width={28} height={28}>
     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+    <polyline points="9 12 11 14 15 10"/>
   </svg>
 );
 
-/* ─── Feature data ───────────────────────────────────────── */
 const features: Feature[] = [
   {
     number: 1,
@@ -188,17 +197,15 @@ const features: Feature[] = [
   },
 ];
 
-/* ─── Feature Row ────────────────────────────────────────── */
 function FeatureRow({ feature, flipped }: { feature: Feature; flipped: boolean }) {
   const textDelay = flipped ? "0.1s" : "0s";
-  const imgDelay = flipped ? "0s" : "0.1s";
+  const imgDelay  = flipped ? "0s"   : "0.1s";
 
   return (
     <div
       className={`feature-row reveal ${flipped ? "flipped" : ""}`}
       style={{ "--text-delay": textDelay, "--img-delay": imgDelay } as React.CSSProperties}
     >
-      {/* Text side */}
       <div className="feature-text">
         <div className="feature-tag-row">
           <span className="feature-number">{feature.number}</span>
@@ -213,7 +220,6 @@ function FeatureRow({ feature, flipped }: { feature: Feature; flipped: boolean }
         </ul>
       </div>
 
-      {/* Icon card */}
       <div className="feature-card">
         <div className="feature-icon-wrap">{feature.icon}</div>
         <div className="feature-card-lines">
@@ -226,25 +232,23 @@ function FeatureRow({ feature, flipped }: { feature: Feature; flipped: boolean }
   );
 }
 
-/* ─── Main Page ──────────────────────────────────────────── */
 export default function FeaturesPage() {
   useReveal();
 
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,700;1,700&family=Epilogue:wght@400;500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500&display=swap');
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         .fp-page {
           background: #f0ede6;
           min-height: 100vh;
-          font-family: 'Epilogue', sans-serif;
+          font-family: 'Inter', sans-serif;
           padding: 80px 24px 120px;
         }
 
-        /* ── Reveal animation ── */
         .reveal {
           opacity: 0;
           transform: translateY(36px);
@@ -252,7 +256,6 @@ export default function FeaturesPage() {
         }
         .reveal.revealed { opacity: 1; transform: translateY(0); }
 
-        /* ── Row layout ── */
         .feature-row {
           display: grid;
           grid-template-columns: 1fr 1fr;
@@ -264,11 +267,10 @@ export default function FeaturesPage() {
         .feature-row.flipped .feature-text { order: 2; }
         .feature-row.flipped .feature-card { order: 1; }
 
-        /* Text side delays */
         .feature-row .feature-text { transition-delay: var(--text-delay, 0s); }
         .feature-row .feature-card { transition-delay: var(--img-delay, 0.1s); }
 
-        /* ── Tag row ── */
+        /* Tag row */
         .feature-tag-row {
           display: flex;
           align-items: center;
@@ -279,43 +281,45 @@ export default function FeaturesPage() {
           width: 28px;
           height: 28px;
           border-radius: 50%;
-          background: #6b3fd4;
+          background: #8935E9;
           color: #fff;
           font-size: 13px;
           font-weight: 700;
+          font-family: 'Inter', sans-serif;
           display: flex;
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
         }
         .feature-tag {
-          font-size: 11px;
-          font-weight: 700;
-          letter-spacing: 0.1em;
+          font-family: 'Inter', sans-serif;
+          font-size: 14px;
+          font-weight: 500;
+          letter-spacing: 0.7px;
           text-transform: uppercase;
-          color: #7c5fc7;
+          color: #8935E9;
+          line-height: 1;
         }
 
-        /* ── Headline ── */
         .feature-headline {
-          font-family: 'Lora', serif;
-          font-weight: 700;
-          font-size: clamp(1.4rem, 2.8vw, 2rem);
-          line-height: 1.2;
-          color: #1a1530;
+          font-family: 'DM Serif Display', serif;
+          font-weight: 400;
+          font-style: normal;
+          font-size: 28px;
+          line-height: 36.4px;
+          color: #131320;
           margin-bottom: 16px;
-          letter-spacing: -0.01em;
+          letter-spacing: 0;
         }
 
-        /* ── Body ── */
         .feature-body {
+          font-family: 'Inter', sans-serif;
           font-size: 14.5px;
           line-height: 1.72;
           color: #4a4560;
           margin-bottom: 20px;
         }
 
-        /* ── Bullets ── */
         .feature-bullets {
           list-style: none;
           display: flex;
@@ -323,6 +327,7 @@ export default function FeaturesPage() {
           gap: 8px;
         }
         .feature-bullets li {
+          font-family: 'Inter', sans-serif;
           font-size: 13px;
           color: #4a4560;
           padding-left: 18px;
@@ -337,11 +342,11 @@ export default function FeaturesPage() {
           width: 6px;
           height: 6px;
           border-radius: 50%;
-          background: #6b3fd4;
+          background: #8935E9;
           opacity: 0.7;
         }
 
-        /* ── Icon card ── */
+        /* Icon card */
         .feature-card {
           background: #e8e4f0;
           border-radius: 20px;
@@ -355,10 +360,9 @@ export default function FeaturesPage() {
         }
         .feature-card:hover {
           transform: translateY(-5px) scale(1.02);
-          box-shadow: 0 20px 48px rgba(90,50,200,0.12);
+          box-shadow: 0 20px 48px rgba(137,53,233,0.12);
         }
 
-        /* subtle grid lines on card bg */
         .feature-card-lines {
           position: absolute;
           inset: 0;
@@ -366,47 +370,43 @@ export default function FeaturesPage() {
         }
         .card-line {
           position: absolute;
-          background: rgba(107,63,212,0.07);
+          background: rgba(137,53,233,0.07);
           border-radius: 2px;
         }
         .card-line:nth-child(1) { left: 18%; top: 28%; width: 64%; height: 1px; }
         .card-line:nth-child(2) { left: 18%; top: 64%; width: 64%; height: 1px; }
         .card-line:nth-child(3) { left: 18%; bottom: 20%; width: 36%; height: 1px; opacity: 0.5; }
 
-        /* Icon wrapper */
         .feature-icon-wrap {
           width: 68px;
           height: 68px;
           border-radius: 18px;
-          background: #6b3fd4;
+          background: #8935E9;
           display: flex;
           align-items: center;
           justify-content: center;
           color: #fff;
           position: relative;
           z-index: 1;
-          box-shadow: 0 8px 24px rgba(107,63,212,0.35);
+          box-shadow: 0 8px 24px rgba(137,53,233,0.35);
           transition: transform 0.3s, box-shadow 0.3s;
         }
         .feature-card:hover .feature-icon-wrap {
           transform: scale(1.08) rotate(-3deg);
-          box-shadow: 0 12px 32px rgba(107,63,212,0.45);
+          box-shadow: 0 12px 32px rgba(137,53,233,0.45);
         }
 
-        /* ── Divider ── */
         .section-divider {
           width: 48px;
           height: 2px;
-          background: linear-gradient(90deg, #6b3fd4, transparent);
+          background: linear-gradient(90deg, #8935E9, transparent);
           border-radius: 1px;
           margin: 0 auto 96px;
           opacity: 0.35;
         }
 
-        /* ── Mobile ── */
         @media (max-width: 680px) {
           .fp-page { padding: 48px 16px 80px; }
-
           .feature-row {
             grid-template-columns: 1fr;
             gap: 28px;
@@ -414,9 +414,8 @@ export default function FeaturesPage() {
           }
           .feature-row.flipped .feature-text { order: 1; }
           .feature-row.flipped .feature-card { order: 2; }
-
           .feature-card { aspect-ratio: 16/9; }
-          .feature-headline { font-size: 1.35rem; }
+          .feature-headline { font-size: 24px; line-height: 31px; }
           .section-divider { margin-bottom: 72px; }
         }
 

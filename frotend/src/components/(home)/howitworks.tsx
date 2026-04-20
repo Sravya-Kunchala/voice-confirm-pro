@@ -30,7 +30,6 @@ export default function HowItWorks() {
   const eyebrowRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const subRef = useRef<HTMLParagraphElement>(null);
-  const connectorRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
@@ -47,7 +46,6 @@ export default function HowItWorks() {
       eyebrowRef.current,
       headingRef.current,
       subRef.current,
-      connectorRef.current,
       ...cardRefs.current,
     ]
       .filter(Boolean)
@@ -77,20 +75,6 @@ export default function HowItWorks() {
         .hiw-heading.visible { transition-delay: 0.1s; }
         .hiw-sub.visible     { transition-delay: 0.18s; }
 
-        .hiw-connector {
-          position: absolute;
-          top: 36px;
-          left: calc(25% - 8px);
-          right: calc(25% - 8px);
-          height: 1px;
-          background: linear-gradient(90deg, #6d28d9, rgba(109,40,217,0.25));
-          opacity: 0;
-          transition: opacity 0.6s ease 0.6s;
-          pointer-events: none;
-          z-index: 0;
-        }
-        .hiw-connector.visible { opacity: 1; }
-
         .hiw-card {
           position: relative;
           z-index: 1;
@@ -117,7 +101,6 @@ export default function HowItWorks() {
           .hiw-grid {
             grid-template-columns: repeat(2, 1fr) !important;
           }
-          .hiw-connector { display: none; }
           .hiw-section { padding: 56px 40px !important; }
         }
         @media (max-width: 540px) {
@@ -196,9 +179,6 @@ export default function HowItWorks() {
             position: "relative",
           }}
         >
-          {/* Connector line between cards */}
-          <div ref={connectorRef} className="hiw-connector" />
-
           {steps.map((step, i) => (
             <div
               key={step.number}
